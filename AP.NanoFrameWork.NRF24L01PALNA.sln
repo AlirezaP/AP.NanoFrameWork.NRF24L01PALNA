@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "AP.NanoFrameWork.NRF24L01PALNA", "AP.NanoFrameWork.NRF24L01PALNA.nfproj", "{5D218566-1488-4493-AB60-1BD58E473E70}"
+EndProject
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "NRF24L01PALNASample", "Sample\NRF24L01PALNA\NRF24L01PALNASample.nfproj", "{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D218566-1488-4493-AB60-1BD58E473E70}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA5950F-8B6C-4F3E-8DF5-5E299408FD81}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC6E48DA-9973-431F-B1D4-4DF8F7114457}
+	EndGlobalSection
+EndGlobal
