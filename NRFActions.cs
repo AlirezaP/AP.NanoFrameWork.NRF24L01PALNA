@@ -206,12 +206,13 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
         {
 
 
-            byte[] rx_buf = new byte[TX_PLOAD_WIDTH];
+            byte[] rx_buf = null;
 
             byte stateResult = SPIRead((byte)(Register.NRF_STATUS));
 
             if ((stateResult & BV(RX_DR)) > 0)
             {
+                rx_buf = new byte[TX_PLOAD_WIDTH];
                 //_ce.Write(ceLow);
 
                 rx_buf = SPIReadBuffer((byte)Register.RD_RX_PLOAD, TX_PLOAD_WIDTH);
@@ -253,8 +254,7 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
             byte sstatus = SPIRead((byte)(Register.NRF_STATUS));
 
-            Debug.WriteLine("NRF_STATUS: ");
-            Debug.WriteLine(sstatus.ToString());
+            Debug.WriteLine($"NRF_STATUS: {sstatus.ToString()}");
 
             SPIWriteBuffer((byte)Register.WR_TX_PLOAD, tx_buf);
 
@@ -270,25 +270,16 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
                 SPIWriteRegister((byte)(Register.FLUSH_TX), 0);
             }
 
-
-
-
             Thread.Sleep(1000);
 
-            //SPI_RW_Reg((byte)(FLUSH_TX), 0);
 
-
-
-            // _ce.Write(ceHigth);
-            // dalay10us();
 
             Thread.Sleep(100);
 
 
             SPIWriteRegister((byte)(Register.W_REGISTER | Register.NRF_STATUS), sstatus);
 
-            //CE = 0;
-            // _ce.Write(ceLow);
+
 
         }
 
@@ -343,7 +334,8 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
             SPIWriteRegister((byte)(Register.W_REGISTER | Register.CONFIG), 0x0e); // Set PWR_UP bit, enable CRC(2 bytes) & Prim: RX.RX_DR enabled..
 
-
+            SPIWriteRegister((byte)(Register.FLUSH_RX), 0);
+            SPIWriteRegister((byte)(Register.FLUSH_TX), 0);
 
 
             //SPI_RW_Reg((byte)(Register.NRF_STATUS), (byte)(BV(RX_DR) | BV(TX_DS) | BV(MAX_RT)));
@@ -356,9 +348,8 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
         public void InitialRXMode(PAState pa, DataRate rate)
         {
-            Thread.Sleep(500);
             TX_ADDR_New = new byte[5] { 0x70, 0x12, 0x12, 0x00, 0x01 };
-            Thread.Sleep(500);
+
             InitialRXMode(pa, rate, TX_ADDR_New, 0x40);
         }
         public void InitialRXMode(PAState pa, DataRate rate, byte[] txAddress, byte rfChannel = 0x40)
@@ -407,6 +398,10 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
                                                                                    //SPI_RW_Reg((byte)(W_REGISTER | EN_AA), 0x01);
                                                                                    // SPI_RW_Reg((byte)(W_REGISTER | EN_RXADDR), 0x01); // Enable Pipe0 
 
+
+
+            SPIWriteRegister((byte)(Register.FLUSH_RX), 0);
+            SPIWriteRegister((byte)(Register.FLUSH_TX), 0);
 
 
             SPIWriteRegister((byte)(Register.W_REGISTER | Register.NRF_STATUS), (byte)(BV(RX_DR) | BV(TX_DS) | BV(MAX_RT)));
@@ -461,7 +456,7 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
             return (byte)(Pow(2, bit));
         }
 
-       
+
     }
 }
 
