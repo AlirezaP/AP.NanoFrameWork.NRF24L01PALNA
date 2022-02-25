@@ -18,6 +18,7 @@
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
+    <Compile Include="Models\AckEventArgs.cs" />
     <Compile Include="NRFActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

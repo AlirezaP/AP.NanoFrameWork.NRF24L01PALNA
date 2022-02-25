@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AP.NanoFrameWork.NRF24L01PALNA.Models;
+using System;
 using System.Device.Gpio;
 using System.Device.Spi;
 using System.Diagnostics;
@@ -8,6 +9,9 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 {
     public class NRFActions
     {
+        public delegate void ACKRecivedHandler(object source, AckEventArgs e);
+        public event ACKRecivedHandler AckRecivedEventHandler;
+
         public enum PAState { Min = 0x2F, Low = 0x2D, High = 0x2B, Max = 0x29 }
         public enum DataRate { d1Mbps = 0xd7, d2Mbps = 0xdf, d250K = 0xf7 }
         public enum Register
@@ -247,12 +251,11 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
             byte[] tx_buf = new byte[32];
 
             Array.Copy(data, 0, tx_buf, 0, data.Length);
-            //CE = 0;
-            // _ce.Write(ceLow);
 
             Thread.Sleep(100);
 
             byte sstatus = SPIRead((byte)(Register.NRF_STATUS));
+
 
             Debug.WriteLine($"NRF_STATUS: {sstatus.ToString()}");
 
@@ -261,6 +264,7 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
             if ((sstatus & BV(TX_DS)) > 0)
             {
                 SPIWriteRegister((byte)(Register.FLUSH_TX), 0);
+                AckRecivedEventHandler?.Invoke(this, new AckEventArgs(true));
                 // SPI_Write_Buf(WR_TX_PLOAD, tx_buf); // Writes data to TX payload 
             }
 
@@ -272,13 +276,7 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
             Thread.Sleep(1000);
 
-
-
-            Thread.Sleep(100);
-
-
             SPIWriteRegister((byte)(Register.W_REGISTER | Register.NRF_STATUS), sstatus);
-
 
 
         }
