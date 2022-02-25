@@ -296,8 +296,9 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
         public void InitialTXMode(PAState pa, DataRate rate)
         {
+            Thread.Sleep(500);
             TX_ADDR_New = new byte[5] { 0x70, 0x12, 0x12, 0x00, 0x01 };
-
+            Thread.Sleep(500);
             InitialTXMode(pa, rate, TX_ADDR_New, 0x40);
         }
 
@@ -355,8 +356,9 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
         public void InitialRXMode(PAState pa, DataRate rate)
         {
+            Thread.Sleep(500);
             TX_ADDR_New = new byte[5] { 0x70, 0x12, 0x12, 0x00, 0x01 };
-
+            Thread.Sleep(500);
             InitialRXMode(pa, rate, TX_ADDR_New, 0x40);
         }
         public void InitialRXMode(PAState pa, DataRate rate, byte[] txAddress, byte rfChannel = 0x40)

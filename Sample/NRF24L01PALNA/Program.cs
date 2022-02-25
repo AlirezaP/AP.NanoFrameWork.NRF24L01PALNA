@@ -93,35 +93,35 @@ namespace AP.NanoFrameWork.NRF24L01PALNA
 
             ///RX
             ////..................
-            
-            //nrf24.InitialRXMode(NRFActions.PAState.Min, NRFActions.DataRate.d1Mbps);
+
+            nrf24.InitialRXMode(NRFActions.PAState.Min, NRFActions.DataRate.d1Mbps);
 
 
-            //while (true)
-            //{
-            //    Thread.Sleep(1000);
+            while (true)
+            {
+                Thread.Sleep(1000);
 
-            //    var buf = nrf24.ReciveData();
+                var buf = nrf24.ReciveData();
 
-            //    if (buf == null || buf.Length <= 0)
-            //    {
-            //        continue;
-            //    }
+                if (buf == null || buf.Length <= 0)
+                {
+                    continue;
+                }
 
-            //    string res = "";
-            //    for (int i = 0; i < buf.Length; i++)
-            //    {
-            //        res += $"{buf[i].ToString()},";
-            //    }
+                string res = "";
+                for (int i = 0; i < buf.Length; i++)
+                {
+                    res += $"{buf[i].ToString()},";
+                }
 
-            //    Debug.WriteLine(res);
-            //    Debug.WriteLine("");
+                Debug.WriteLine(res);
+                Debug.WriteLine("");
 
-            //    string txt = System.Text.Encoding.UTF8.GetString(buf, 0, buf.Length);
-            //    Debug.WriteLine(txt);
-            //    Debug.WriteLine("------------------");
+                string txt = System.Text.Encoding.UTF8.GetString(buf, 0, buf.Length);
+                Debug.WriteLine(txt);
+                Debug.WriteLine("------------------");
 
-            //}
+            }
 
 
             Thread.Sleep(Timeout.Infinite);
